@@ -1,5 +1,6 @@
 //
 // Created by Okada, Takahiro on 2018/02/04.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #ifndef ARDUINO_WEB3_WEB3_H
@@ -7,6 +8,7 @@
 
 #include "stdint.h"
 #include <string>
+#include "cpp-httplib/httplib.h"
 
 using namespace std;
 
@@ -40,6 +42,7 @@ private:
     double getDouble(const string* json);
     bool getBool(const string* json);
     string getString(const string* json);
+    httplib::Client client;
 
 private:
     const string* host;

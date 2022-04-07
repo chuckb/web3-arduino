@@ -1,18 +1,20 @@
 //
 // Created by Okada, Takahiro on 2018/02/04.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #include "Log.h"
-#include <Arduino.h>
-#define USE_SERIAL Serial
+#include <iostream>
+
+using namespace std;
 
 void Log::print(const char* s) {
 #ifdef DEBUGLOG
-        USE_SERIAL.print(s);
+  cout << s;
 #endif
 }
 void Log::println(const char* s) {
 #ifdef DEBUGLOG
-        USE_SERIAL.println(s);
+  cout << s << endl;
 #endif
 }

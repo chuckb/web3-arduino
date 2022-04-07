@@ -1,9 +1,9 @@
 //
 // Created by Okada, Takahiro on 2018/02/11.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #include "Util.h"
-#include "Arduino.h"
 #include <cstdio>
 #include <cstdlib>
 #include <vector>

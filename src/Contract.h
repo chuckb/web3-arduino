@@ -1,14 +1,15 @@
 //
 // Created by Okada, Takahiro on 2018/02/05.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #ifndef ARDUINO_WEB3_CONTRACT_H
 #define ARDUINO_WEB3_CONTRACT_H
 
-#include "Arduino.h"
 #include "Log.h"
 #include "Web3.h"
 #include <vector>
+#include <string>
 
 using namespace std;
 

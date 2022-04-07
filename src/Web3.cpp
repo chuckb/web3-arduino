@@ -1,22 +1,23 @@
 //
 // Created by Okada, Takahiro on 2018/02/04.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #include "Web3.h"
-#include <WiFiClientSecure.h>
 #include "CaCert.h"
 #include "Log.h"
 #include "Util.h"
 #include "cJSON/cJSON.h"
+#include "cpp-httplib/httplib.h"
 #include <iostream>
 #include <sstream>
+#include <string>
 
-WiFiClientSecure client;
 Log debug;
 #define LOG(x) debug.println(x)
 
-Web3::Web3(const string* _host, const string* _path) {
-    client.setCACert(infura_ca_cert);
+Web3::Web3(const string* _host, const string* _path) : client (httplib::Client(*host)) {
+//    client.setCACert(infura_ca_cert);
     host = _host;
     path = _path;
 }
@@ -168,52 +169,14 @@ string Web3::generateJson(const string* method, const string* params) {
 }
 
 string Web3::exec(const string* data) {
-    string result;
+    LOG("\nCalling server...");
+    LOG("\nSending...\n");
+    LOG(data->c_str());
+    auto response = client.Post(path->c_str(), *data, "application/json");
+    LOG("\nReceived...\n");
+    LOG(response->body.c_str());
 
-    // start connection
-    LOG("\nStarting connection to server...");
-    int connected = client.connect(host->c_str(), 443);
-    if (!connected) {
-        return "";
-    }
-
-    LOG("Connected to server!");
-    // Make a HTTP request:
-    int l = data->size();
-    stringstream ss;
-    ss << l;
-    string lstr = ss.str();
-
-    string strPost = "POST " + *path + " HTTP/1.1";
-    string strHost = "Host: " + *host;
-    string strContentLen = "Content-Length: " + lstr;
-
-    client.println(strPost.c_str());
-    client.println(strHost.c_str());
-    client.println("Content-Type: application/json");
-    client.println(strContentLen.c_str());
-    client.println("Connection: close");
-    client.println();
-    client.println(data->c_str());
-
-    while (client.connected()) {
-        String line = client.readStringUntil('\n');
-        LOG(line.c_str());
-        if (line == "\r") {
-            break;
-        }
-    }
-    // if there are incoming bytes available
-    // from the server, read them and print them:
-    while (client.available()) {
-        char c = client.read();
-        result += c;
-    }
-    LOG(result.c_str());
-
-    client.stop();
-
-    return result;
+    return response->body;
 }
 
 int Web3::getInt(const string* json) {

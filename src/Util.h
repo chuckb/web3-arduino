@@ -1,13 +1,15 @@
 //
 // Created by Okada, Takahiro on 2018/02/11.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #ifndef WEB3_UTIL_H
 #define WEB3_UTIL_H
 
-#include <WiFi.h>
 #include <stdint.h>
 #include <vector>
+#include <cstring>
+#include <string>
 
 using namespace std;
 

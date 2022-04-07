@@ -1,10 +1,10 @@
 //
 // Created by Okada, Takahiro on 2018/02/05.
+// Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
 
 #include "Contract.h"
 #include "Web3.h"
-#include <WiFi.h>
 #include "Util.h"
 #include "Log.h"
 #include <vector>
