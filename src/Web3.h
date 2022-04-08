@@ -6,6 +6,8 @@
 #ifndef ARDUINO_WEB3_WEB3_H
 #define ARDUINO_WEB3_WEB3_H
 
+#define CPPHTTPLIB_OPENSSL_SUPPORT
+
 #include "stdint.h"
 #include <string>
 #include "cpp-httplib/httplib.h"

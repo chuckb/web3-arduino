@@ -2,7 +2,6 @@
 // Created by Okada, Takahiro on 2018/02/04.
 // Adapted to std C++ by Chuck Benedict on 2022/04/07.
 //
-
 #include "Web3.h"
 #include "CaCert.h"
 #include "Log.h"
@@ -16,7 +15,7 @@
 Log debug;
 #define LOG(x) debug.println(x)
 
-Web3::Web3(const string* _host, const string* _path) : client (httplib::Client(*host)) {
+Web3::Web3(const string* _host, const string* _path) : client { httplib::Client(*_host) } {
 //    client.setCACert(infura_ca_cert);
     host = _host;
     path = _path;
@@ -174,7 +173,7 @@ string Web3::exec(const string* data) {
     LOG(data->c_str());
     auto response = client.Post(path->c_str(), *data, "application/json");
     LOG("\nReceived...\n");
-    LOG(response->body.c_str());
+    LOG((response->body).c_str());
 
     return response->body;
 }

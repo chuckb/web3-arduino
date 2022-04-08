@@ -3,7 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/local/Cellar/openssl@1.1/1.1.1m/include"
             ],
             "defines": [],
             "macFrameworkPath": [],

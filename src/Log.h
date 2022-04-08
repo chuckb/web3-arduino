@@ -6,8 +6,6 @@
 #ifndef ARDUINO_WEB3_LOG_H
 #define ARDUINO_WEB3_LOG_H
 
-#define DEBUGLOG
-
 class Log {
 public:
     void print(const char* s);
